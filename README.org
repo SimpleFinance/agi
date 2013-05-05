@@ -1,0 +1,3 @@
+* =cf=
+
+=cf= provides primitives that make it easier to model CloudFormation templates and their primary components.
