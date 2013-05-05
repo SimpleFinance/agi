@@ -1,3 +1,16 @@
 * =cf=
 
 =cf= provides primitives that make it easier to model CloudFormation templates and their primary components.
+
+** Development
+
+#+BEGIN_SRC
+virtualenv .
+./bin/python setup.py develop
+#+END_SRC
+
+** Testing
+
+#+BEGIN_SRC
+./bin/python -m cf.tests.runner
+#+END_SRC
