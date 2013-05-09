@@ -1,6 +1,6 @@
-* =cf=
+* =eyewall=
 
-=cf= provides primitives that make it easier to model CloudFormation templates and their primary components.
+=eyewall= provides primitives that make it easier to model CloudFormation templates and their primary components.
 
 ** Development
 
@@ -12,5 +12,5 @@ virtualenv .
 ** Testing
 
 #+BEGIN_SRC
-./bin/python -m cf.tests.runner
+./bin/python -m eyewall.tests.runner
 #+END_SRC

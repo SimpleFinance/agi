@@ -1,6 +1,6 @@
 import unittest
 
-from cf.fn import *
+from eyewall.fn import *
 
 class TestFn(unittest.TestCase):
 

@@ -1,6 +1,6 @@
 import unittest
 
-from cf.util import *
+from eyewall.util import *
 
 class TestTemplateUtil(unittest.TestCase):
 

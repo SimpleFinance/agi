@@ -1,9 +1,9 @@
 from setuptools import setup
 
 meta = dict(
-    name             = "cf",
+    name             = "eyewall",
     version          = "0.0.1",
-    packages         = ["cf"],
+    packages         = ["eyewall"],
     install_requires = [
         ],
     )
