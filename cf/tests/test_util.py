@@ -1,6 +1,6 @@
 import unittest
 
-from eyewall.util import *
+from agi.util import *
 
 class TestTemplateUtil(unittest.TestCase):
 

@@ -1,6 +1,6 @@
 import unittest
 
-from eyewall.fn import *
+from agi.fn import *
 
 class TestFn(unittest.TestCase):
 

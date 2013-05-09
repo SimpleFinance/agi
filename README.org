@@ -1,6 +1,6 @@
-* =eyewall=
+* =agi=
 
-=eyewall= provides primitives that make it easier to model CloudFormation templates and their primary components.
+=agi= provides primitives that make it easier to model CloudFormation templates and their primary components.
 
 ** Development
 
@@ -12,5 +12,5 @@ virtualenv .
 ** Testing
 
 #+BEGIN_SRC
-./bin/python -m eyewall.tests.runner
+./bin/python -m agi.tests.runner
 #+END_SRC

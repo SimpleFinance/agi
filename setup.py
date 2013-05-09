@@ -1,9 +1,9 @@
 from setuptools import setup
 
 meta = dict(
-    name             = "eyewall",
+    name             = "agi",
     version          = "0.0.1",
-    packages         = ["eyewall"],
+    packages         = ["agi"],
     install_requires = [
         ],
     )
