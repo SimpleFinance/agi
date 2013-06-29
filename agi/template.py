@@ -2,6 +2,7 @@
 """
 
 from .base import Object
+from .fn import Ref
 from .util import *
 
 __all__ = [
@@ -46,12 +47,15 @@ class Template(Object):
 class Resource(Object):
 
     def __init__(self, Type,
+                 Name=None,
                  DependsOn=None,
                  DeletionPolicy=None,
                  UpdatePolicy=None,
                  Metadata=None,
                  Properties=None,
                  **properties):
+        self.Type = Type
+        self.Name = Name
         Properties = merge([Properties or {}, properties]) or None
 
         resource = filter_pairs(
@@ -64,6 +68,11 @@ class Resource(Object):
 
         super(Resource, self).__init__(resource)
 
+    def id(self):
+        return self.Type if self.Name is None else "%s::%s" % (self.Type, self.Name)
+
+    def ref(self):
+        return Ref(self.id())
 
 class Parameters(Object): pass
 class Parameter(Object):
