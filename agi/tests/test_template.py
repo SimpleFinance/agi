@@ -62,6 +62,7 @@ class TestResource(unittest.TestCase):
     def setUp(self):
         super(TestResource, self).setUp()
         self.resource = Resource("type",
+            Name = "name",
             DependsOn = "dependson",
             DeletionPolicy = "deletionpolicy",
             UpdatePolicy = "updatepolicy",
@@ -72,6 +73,9 @@ class TestResource(unittest.TestCase):
             Bar = "bar",
             Baz = "baz",
             )
+
+    def test_name(self):
+        self.assertEqual("name", self.resource.Name)
 
     def test_depends_on(self):
         self.assertEqual("dependson", self.resource["DependsOn"])
@@ -91,6 +95,12 @@ class TestResource(unittest.TestCase):
     def test_property(self):
         self.assertEqual("foo", self.resource["Properties"]["Foo"])
 
+    def test_id(self):
+        self.assertEqual("type::name", self.resource.id())
+
+    def test_ref(self):
+        self.assertEqual({"Ref": "type::name"}, self.resource.ref())
+
 class TestResourceDefaults(unittest.TestCase):
 
     def setUp(self):
@@ -101,10 +111,20 @@ class TestResourceDefaults(unittest.TestCase):
         self.assertEqual(1, len(self.resource))
 
     def test_type(self):
+        self.assertEqual("type", self.resource.Type)
         self.assertEqual("type", self.resource["Type"])
 
     def test_no_type(self):
         self.assertRaises(TypeError, Resource)
+
+    def test_name(self):
+        self.assertEqual(None, self.resource.Name)
+
+    def test_id(self):
+        self.assertEqual("type", self.resource.id())
+
+    def test_ref(self):
+        self.assertEqual({"Ref": "type"}, self.resource.ref())
 
 
 class TestParameter(unittest.TestCase):
