@@ -1,4 +1,4 @@
-from .template import Object
+from .base import Object
 
 __all__ = [
     "Fn",
