@@ -69,7 +69,7 @@ class Resource(Object):
         super(Resource, self).__init__(resource)
 
     def id(self):
-        return self.Type if self.Name is None else "%s::%s" % (self.Type, self.Name)
+        return "::".join(filter(None, (self.Type, self.Name)))
 
     def ref(self):
         return Ref(self.id())
