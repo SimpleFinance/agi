@@ -1,6 +1,7 @@
 """Templates and their main components.
 """
 
+from .base import Object
 from .util import *
 
 __all__ = [
@@ -11,7 +12,6 @@ __all__ = [
     "Resource",
 ]
 
-class Object(dict): pass
 class ListObject(list):
 
     def __init__(self, *items):
