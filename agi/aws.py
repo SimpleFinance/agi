@@ -1,6 +1,3 @@
-from functools import partial
-
-from .base import Object
 from .template import Resource
 
 __all__ = ["service", "AWS"]
