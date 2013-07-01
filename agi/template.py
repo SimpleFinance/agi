@@ -10,7 +10,7 @@ __all__ = [
     "Parameters", "Parameter",
     "Mappings", "Mapping",
     "Outputs", "Output",
-    "Resource",
+    "Resource", "Property", "Attribute", "Options",
 ]
 
 class ListObject(list):
@@ -73,6 +73,10 @@ class Resource(Object):
 
     def ref(self):
         return Ref(self.id())
+
+class Property(Object): pass
+class Options(Object): pass
+class Attribute(Object): pass
 
 class Parameters(Object): pass
 class Parameter(Object):
