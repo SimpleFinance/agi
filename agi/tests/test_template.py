@@ -96,14 +96,14 @@ class TestResource(unittest.TestCase):
         self.assertEqual("foo", self.resource["Properties"]["Foo"])
 
     def test_id(self):
-        self.assertEqual("type::name", self.resource.id())
+        self.assertEqual("TypeName", self.resource.id())
 
     def test_id_no_type(self):
         self.resource.Type = None
-        self.assertEqual("name", self.resource.id())
+        self.assertEqual("Name", self.resource.id())
 
     def test_ref(self):
-        self.assertEqual({"Ref": "type::name"}, self.resource.ref())
+        self.assertEqual({"Ref": "TypeName"}, self.resource.ref())
 
 class TestResourceDefaults(unittest.TestCase):
 
@@ -125,14 +125,14 @@ class TestResourceDefaults(unittest.TestCase):
         self.assertEqual(None, self.resource.Name)
 
     def test_id(self):
-        self.assertEqual("type", self.resource.id())
+        self.assertEqual("Type", self.resource.id())
 
     def test_id_type_none(self):
         self.resource.Type = None
         self.assertEqual("", self.resource.id())
 
     def test_ref(self):
-        self.assertEqual({"Ref": "type"}, self.resource.ref())
+        self.assertEqual({"Ref": "Type"}, self.resource.ref())
 
 
 class TestParameter(unittest.TestCase):
