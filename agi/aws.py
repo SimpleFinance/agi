@@ -16,7 +16,7 @@ def service(name, *services):
     return Service
 
 AWS = service("AWS")
-AWS.AutoScaling = service("AWS::Autoscaling",
+AWS.AutoScaling = service("AWS::AutoScaling",
     "AutoScalingGroup",                          
     "LaunchConfiguration",
 )
