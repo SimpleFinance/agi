@@ -69,8 +69,12 @@ class Resource(Object):
         super(Resource, self).__init__(resource)
 
     def id(self):
-        path = "::".join(filter(None, (self.Type, self.Name)))
-        return "".join(atom.capitalize() for atom in path.split("::"))
+        name = self.Name
+        if name is not None:
+            name = name.capitalize()
+
+        path = "::".join(filter(None, (self.Type, name)))
+        return "".join(path.split("::"))
 
     def ref(self):
         return Ref(self.id())
