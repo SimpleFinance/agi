@@ -83,6 +83,7 @@ class Parameters(Object): pass
 class Parameter(Object):
 
     def __init__(self, Type,
+                 Name=None,
                  Default=None,
                  NoEcho=None,
                  AllowedValues=None,
@@ -93,6 +94,7 @@ class Parameter(Object):
                  MinValue=None,
                  Description=None,
                  ConstraintDescription=None):
+        self.Name = Name
         parameter = filter_pairs(
             Type=Type,
             Default=Default,
@@ -106,6 +108,12 @@ class Parameter(Object):
             ConstraintDescription=ConstraintDescription,
             )            
         super(Parameter, self).__init__(parameter)
+
+    def id(self):
+        return self.Name
+
+    def ref(self):
+        return Ref(self.id())
 
 class Mappings(Object): pass
 class Mapping(Object): pass

@@ -140,6 +140,7 @@ class TestParameter(unittest.TestCase):
     def setUp(self):
         super(TestParameter, self).setUp()
         self.parameter = Parameter("type",
+            Name="name",
             Default="default",
             AllowedValues="allowedvalues",
             AllowedPattern="allowedpattern",
@@ -181,6 +182,9 @@ class TestParameter(unittest.TestCase):
         
     def test_constraintdescription(self):
         self.assertEqual("constraintdescription", self.parameter["ConstraintDescription"])
+
+    def test_ref(self):
+        self.assertEqual({'Ref': 'name'}, self.parameter.ref())
 
 class TestParameterDefaults(unittest.TestCase):
 
