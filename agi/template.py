@@ -55,6 +55,10 @@ class Resource(Object):
                  Properties=None,
                  **properties):
         self.Type = Type
+
+        if Name is not None and not is_alpha(Name):
+            raise TypeError("Resource Name must be alpha-numeric (%s)" % Name)
+
         self.Name = Name
         Properties = merge([Properties or {}, properties]) or None
 

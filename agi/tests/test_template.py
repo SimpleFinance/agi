@@ -77,6 +77,9 @@ class TestResource(unittest.TestCase):
     def test_name(self):
         self.assertEqual("name", self.resource.Name)
 
+    def test_name_non_alpha_typeerror(self):
+        self.assertRaises(TypeError, Resource, [], {"Name": "bad-name"})
+
     def test_depends_on(self):
         self.assertEqual("dependson", self.resource["DependsOn"])
 
