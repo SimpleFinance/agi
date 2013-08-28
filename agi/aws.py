@@ -21,5 +21,7 @@ AWS.AutoScaling = service("AWS::AutoScaling",
     "LaunchConfiguration",
 )
 AWS.EC2 = service("AWS::EC2",
+    "EIPAssociation",
+    "Instance",
     "SecurityGroup",
 )
