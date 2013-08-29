@@ -2,7 +2,7 @@
 """
 
 from .base import Object
-from .fn import Ref
+from .fn import Ref, FnGetAtt
 from .util import *
 
 __all__ = [
@@ -82,6 +82,9 @@ class Resource(Object):
 
     def ref(self):
         return Ref(self.id())
+
+    def get(self, attribute):
+        return FnGetAtt(self.id(), attribute)
 
 class Property(Object): pass
 class Options(Object): pass
