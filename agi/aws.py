@@ -26,3 +26,7 @@ AWS.EC2 = service("AWS::EC2",
     "Instance",
     "SecurityGroup",
 )
+AWS.IAM = service("AWS::IAM",
+    "InstanceProfile",
+    "Role",
+)
