@@ -24,6 +24,7 @@ AWS.EC2 = service("AWS::EC2",
     "EIP",
     "EIPAssociation",
     "Instance",
+    "NetworkInterface",
     "SecurityGroup",
 )
 AWS.IAM = service("AWS::IAM",
