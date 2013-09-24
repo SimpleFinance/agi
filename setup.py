@@ -1,11 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
-meta = dict(
-    name             = "agi",
-    version          = "0.0.1",
-    packages         = ["agi"],
-    install_requires = [
-        ],
-    )
-
-setup(**meta)
+setup(
+    name="agi",
+    version="0.0.1",
+    packages=find_packages(exclude=['agi.tests'])
+)
