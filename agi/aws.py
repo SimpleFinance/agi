@@ -1,9 +1,9 @@
 from .template import Resource
 
-__all__ = ["service", "AWS"]
 
 def service(name, *services):
     sep = "::"
+
     class Service(Resource):
 
         def __init__(self, Name=None, **params):
@@ -16,18 +16,21 @@ def service(name, *services):
     return Service
 
 AWS = service("AWS")
-AWS.AutoScaling = service("AWS::AutoScaling",
-    "AutoScalingGroup",                          
+AWS.AutoScaling = service(
+    "AWS::AutoScaling",
+    "AutoScalingGroup",
     "LaunchConfiguration",
 )
-AWS.EC2 = service("AWS::EC2",
+AWS.EC2 = service(
+    "AWS::EC2",
     "EIP",
     "EIPAssociation",
     "Instance",
     "NetworkInterface",
     "SecurityGroup",
 )
-AWS.IAM = service("AWS::IAM",
+AWS.IAM = service(
+    "AWS::IAM",
     "InstanceProfile",
     "Role",
 )
