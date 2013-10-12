@@ -12,7 +12,7 @@ virtualenv venv
 ** Testing
 
 #+BEGIN_SRC
-./venv/bin/python -m agi.tests.runner
+./venv/bin/python -m tests.runner
 #+END_SRC
 ** Etymology
 
