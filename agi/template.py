@@ -108,6 +108,7 @@ class Parameter(Object):
                  MinLength=None,
                  MaxValue=None,
                  MinValue=None,
+                 NoEcho=None,
                  Description=None,
                  ConstraintDescription=None):
         self.Name = Name
@@ -120,6 +121,7 @@ class Parameter(Object):
             MinLength=MinLength,
             MaxValue=MaxValue,
             MinValue=MinValue,
+            NoEcho=NoEcho,
             Description=Description,
             ConstraintDescription=ConstraintDescription,
             )
