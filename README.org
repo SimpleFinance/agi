@@ -12,8 +12,11 @@ virtualenv venv
 ** Testing
 
 #+BEGIN_SRC
+./venv/bin/pip install flake8
+./venv/bin/flake8 agi
 ./venv/bin/python -m tests.runner
 #+END_SRC
+
 ** Etymology
 
 =agi= refers to [[http://en.wikipedia.org/wiki/Silver_iodide][silver iodide]] (AgI), a compound commonly used to seed clouds.
