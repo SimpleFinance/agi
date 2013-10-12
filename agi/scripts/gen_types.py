@@ -11,7 +11,7 @@ for svc, typ in [typ.rsplit("::", 1) for typ in types]:
 for service in sorted(service_types):
     types = sorted(service_types[service])
     service = service.split("::")[1]
-    print 'AWS.%s = service("AWS::%s",' % (service, service)
-    for typ in types:
+    print 'AWS.%s = service(' % service
+    for typ in [service] + types:
         print '    "%s",' % typ
     print ')'
