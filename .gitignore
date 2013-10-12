@@ -1,6 +1,5 @@
-/bin
-/include
-/lib
-/*.egg-info
-/env
 *.pyc
+/*.egg-info
+/build
+/dist
+/venv

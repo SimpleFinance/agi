@@ -1,26 +1,20 @@
 """Templates and their main components.
 """
 
+from . import util
 from .base import Object
 from .fn import Ref, FnGetAtt
-from .util import *
 
-__all__ = [
-    "Template",
-    "Parameters", "Parameter",
-    "Mappings", "Mapping",
-    "Outputs", "Output",
-    "Resource", "Property", "Attribute", "Options",
-]
 
 class ListObject(list):
 
     def __init__(self, *items):
         super(ListObject, self).__init__(list(items))
 
+
 class Template(Object):
 
-    def __init__(self, 
+    def __init__(self,
                  AWSTemplateFormatVersion=None,
                  Description=None,
                  Parameters=None,
@@ -28,12 +22,12 @@ class Template(Object):
                  Outputs=None,
                  Resources=None,
                  **resources):
-        Resources = merge([Resources or {}, resources])
+        Resources = util.merge([Resources or {}, resources])
 
         if not Resources:
             raise TypeError("Template must have resources")
 
-        template = filter_pairs(
+        template = util.filter_pairs(
             AWSTemplateFormatVersion=AWSTemplateFormatVersion,
             Description=Description,
             Parameters=Parameters,
@@ -56,13 +50,13 @@ class Resource(Object):
                  **properties):
         self.Type = Type
 
-        if Name is not None and not is_alpha(Name):
+        if Name is not None and not util.is_alpha(Name):
             raise TypeError("Resource Name must be alpha-numeric (%s)" % Name)
 
         self.Name = Name
-        Properties = merge([Properties or {}, properties]) or None
+        Properties = util.merge([Properties or {}, properties]) or None
 
-        resource = filter_pairs(
+        resource = util.filter_pairs(
             Type=Type,
             DependsOn=DependsOn,
             DeletionPolicy=DeletionPolicy,
@@ -86,17 +80,28 @@ class Resource(Object):
     def get(self, attribute):
         return FnGetAtt(self.id(), attribute)
 
-class Property(Object): pass
-class Options(Object): pass
-class Attribute(Object): pass
 
-class Parameters(Object): pass
+class Property(Object):
+    pass
+
+
+class Options(Object):
+    pass
+
+
+class Attribute(Object):
+    pass
+
+
+class Parameters(Object):
+    pass
+
+
 class Parameter(Object):
 
     def __init__(self, Type,
                  Name=None,
                  Default=None,
-                 NoEcho=None,
                  AllowedValues=None,
                  AllowedPattern=None,
                  MaxLength=None,
@@ -106,7 +111,7 @@ class Parameter(Object):
                  Description=None,
                  ConstraintDescription=None):
         self.Name = Name
-        parameter = filter_pairs(
+        parameter = util.filter_pairs(
             Type=Type,
             Default=Default,
             AllowedValues=AllowedValues,
@@ -117,7 +122,7 @@ class Parameter(Object):
             MinValue=MinValue,
             Description=Description,
             ConstraintDescription=ConstraintDescription,
-            )            
+            )
         super(Parameter, self).__init__(parameter)
 
     def id(self):
@@ -126,10 +131,19 @@ class Parameter(Object):
     def ref(self):
         return Ref(self.id())
 
-class Mappings(Object): pass
-class Mapping(Object): pass
 
-class Outputs(Object): pass
+class Mappings(Object):
+    pass
+
+
+class Mapping(Object):
+    pass
+
+
+class Outputs(Object):
+    pass
+
+
 class Output(Object):
 
     def __init__(self, value, description=None):

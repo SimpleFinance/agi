@@ -1,23 +1,24 @@
 import unittest
 
-from agi.template import *
+from agi.template import Template, Resource, Parameter
+
 
 class TestTemplate(unittest.TestCase):
 
     def setUp(self):
         super(TestTemplate, self).setUp()
         self.template = Template(
-            AWSTemplateFormatVersion = "version",
-            Description = "description",
-            Parameters = "parameters",
-            Outputs = "outputs",
-            Mappings = "mappings",
-            Resources = dict(
-                Foo = "foo",
+            AWSTemplateFormatVersion="version",
+            Description="description",
+            Parameters="parameters",
+            Outputs="outputs",
+            Mappings="mappings",
+            Resources=dict(
+                Foo="foo",
             ),
             # More Resources.
-            Bar = "bar",
-            Baz = "baz",
+            Bar="bar",
+            Baz="baz",
         )
 
     def test_version(self):
@@ -46,33 +47,35 @@ class TestTemplateDefaults(unittest.TestCase):
 
     def setUp(self):
         super(TestTemplateDefaults, self).setUp()
-        self.template = Template(Foo = "foo")
+        self.template = Template(Foo="foo")
 
     def test_no_resources(self):
         self.assertRaises(TypeError, Template)
-        
+
     def test_skip_unset(self):
         self.assertEqual(1, len(self.template))
 
     def test_resource_len(self):
         self.assertEqual(1, len(self.template))
 
+
 class TestResource(unittest.TestCase):
 
     def setUp(self):
         super(TestResource, self).setUp()
-        self.resource = Resource("type",
-            Name = "name",
-            DependsOn = "dependson",
-            DeletionPolicy = "deletionpolicy",
-            UpdatePolicy = "updatepolicy",
-            Metadata = "metadata",
-            Properties = dict(
-                Foo = "foo",
+        self.resource = Resource(
+            "type",
+            Name="name",
+            DependsOn="dependson",
+            DeletionPolicy="deletionpolicy",
+            UpdatePolicy="updatepolicy",
+            Metadata="metadata",
+            Properties=dict(
+                Foo="foo",
             ),
-            Bar = "bar",
-            Baz = "baz",
-            )
+            Bar="bar",
+            Baz="baz",
+        )
 
     def test_name(self):
         self.assertEqual("name", self.resource.Name)
@@ -108,11 +111,12 @@ class TestResource(unittest.TestCase):
     def test_ref(self):
         self.assertEqual({"Ref": "typeName"}, self.resource.ref())
 
+
 class TestResourceDefaults(unittest.TestCase):
 
     def setUp(self):
-        super(TestResourceDefaults, self).setUp()    
-        self.resource = Resource(Type = "type")
+        super(TestResourceDefaults, self).setUp()
+        self.resource = Resource(Type="type")
 
     def test_nothing(self):
         self.assertEqual(1, len(self.resource))
@@ -142,7 +146,8 @@ class TestParameter(unittest.TestCase):
 
     def setUp(self):
         super(TestParameter, self).setUp()
-        self.parameter = Parameter("type",
+        self.parameter = Parameter(
+            "type",
             Name="name",
             Default="default",
             AllowedValues="allowedvalues",
@@ -155,39 +160,40 @@ class TestParameter(unittest.TestCase):
             ConstraintDescription="constraintdescription",
         )
 
-
     def test_type(self):
         self.assertEqual("type", self.parameter["Type"])
-        
+
     def test_default(self):
         self.assertEqual("default", self.parameter["Default"])
 
     def test_allowedvalues(self):
         self.assertEqual("allowedvalues", self.parameter["AllowedValues"])
-        
+
     def test_allowedpattern(self):
         self.assertEqual("allowedpattern", self.parameter["AllowedPattern"])
-        
+
     def test_maxlength(self):
         self.assertEqual("maxlength", self.parameter["MaxLength"])
 
     def test_minlength(self):
         self.assertEqual("minlength", self.parameter["MinLength"])
-        
+
     def test_maxvalue(self):
         self.assertEqual("maxvalue", self.parameter["MaxValue"])
-        
+
     def test_minvalue(self):
         self.assertEqual("minvalue", self.parameter["MinValue"])
-        
+
     def test_description(self):
         self.assertEqual("description", self.parameter["Description"])
-        
+
     def test_constraintdescription(self):
-        self.assertEqual("constraintdescription", self.parameter["ConstraintDescription"])
+        self.assertEqual("constraintdescription",
+                         self.parameter["ConstraintDescription"])
 
     def test_ref(self):
         self.assertEqual({'Ref': 'name'}, self.parameter.ref())
+
 
 class TestParameterDefaults(unittest.TestCase):
 
@@ -203,6 +209,6 @@ class TestParameterDefaults(unittest.TestCase):
 
     def test_no_type(self):
         self.assertRaises(TypeError, Parameter)
-        
+
 if __name__ == "__main__":
     unittest.main()

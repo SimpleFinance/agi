@@ -5,14 +5,14 @@
 ** Development
 
 #+BEGIN_SRC
-virtualenv .
-./bin/python setup.py develop
+virtualenv venv
+./venv/bin/python setup.py develop
 #+END_SRC
 
 ** Testing
 
 #+BEGIN_SRC
-./bin/python -m agi.tests.runner
+./venv/bin/python -m agi.tests.runner
 #+END_SRC
 ** Etymology
 
