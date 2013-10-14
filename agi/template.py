@@ -1,8 +1,13 @@
 """Templates and their main components.
 """
 
-from . import util
+from itertools import ifilter
+
 from .fn import Ref, FnGetAtt
+
+
+def filter_pairs(**pairs):
+    return ifilter(lambda (k, v): v, pairs.iteritems())
 
 
 class Listdict(list):
@@ -29,7 +34,7 @@ class Template(dict):
             raise TypeError("Template must have resources")
 
         self.update(
-            util.filter_pairs(
+            filter_pairs(
                 AWSTemplateFormatVersion=AWSTemplateFormatVersion,
                 Description=Description,
                 Parameters=Parameters,
@@ -62,7 +67,7 @@ class Resource(dict):
         self.Name = Name
 
         self.update(
-            util.filter_pairs(
+            filter_pairs(
                 Type=Type,
                 DependsOn=DependsOn,
                 DeletionPolicy=DeletionPolicy,
@@ -120,7 +125,7 @@ class Parameter(dict):
         self.Name = Name
 
         self.update(
-            util.filter_pairs(
+            filter_pairs(
                 Type=Type,
                 Default=Default,
                 AllowedValues=AllowedValues,

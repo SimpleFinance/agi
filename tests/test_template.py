@@ -1,6 +1,14 @@
 import unittest
 
-from agi.template import Template, Resource, Parameter
+from agi.template import Template, Resource, Parameter, filter_pairs
+
+
+class TestTemplateUtil(unittest.TestCase):
+
+    def test_filter_pairs(self):
+        self.assertEqual(
+            [("a", 3)],
+            list(filter_pairs(a=3, b=None)))
 
 
 class TestTemplate(unittest.TestCase):
