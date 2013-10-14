@@ -1,11 +1,8 @@
-from .base import Object
-
-
-class Fn(Object):
+class Fn(dict):
 
     def __init__(self, arg):
         name = self.__class__.__name__.replace("Fn", "Fn::")
-        super(Fn, self).__init__({name: arg})
+        self.update({name: arg})
 
 
 class FnBase64(Fn):
@@ -42,7 +39,7 @@ class FnSelect(Fn):
         super(FnSelect, self).__init__([str(index), list(values)])
 
 
-class Ref(Object):
+class Ref(dict):
 
     def __init__(self, name):
-        super(Ref, self).__init__(Ref=name)
+        self.update({'Ref': name})

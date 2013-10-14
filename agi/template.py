@@ -2,17 +2,16 @@
 """
 
 from . import util
-from .base import Object
 from .fn import Ref, FnGetAtt
 
 
-class ListObject(list):
+class Listdict(list):
 
     def __init__(self, *items):
-        super(ListObject, self).__init__(list(items))
+        self += list(items)
 
 
-class Template(Object):
+class Template(dict):
 
     def __init__(self,
                  AWSTemplateFormatVersion=None,
@@ -22,23 +21,26 @@ class Template(Object):
                  Outputs=None,
                  Resources=None,
                  **resources):
-        Resources = util.merge([Resources or {}, resources])
-
         if not Resources:
+            Resources = {}
+        Resources.update(resources)
+
+        if not len(Resources):
             raise TypeError("Template must have resources")
 
-        template = util.filter_pairs(
-            AWSTemplateFormatVersion=AWSTemplateFormatVersion,
-            Description=Description,
-            Parameters=Parameters,
-            Mappings=Mappings,
-            Outputs=Outputs,
-            Resources=Resources)
+        self.update(
+            util.filter_pairs(
+                AWSTemplateFormatVersion=AWSTemplateFormatVersion,
+                Description=Description,
+                Parameters=Parameters,
+                Mappings=Mappings,
+                Outputs=Outputs,
+                Resources=Resources
+            )
+        )
 
-        super(Template, self).__init__(template)
 
-
-class Resource(Object):
+class Resource(dict):
 
     def __init__(self, Type,
                  Name=None,
@@ -50,21 +52,25 @@ class Resource(Object):
                  **properties):
         self.Type = Type
 
-        if Name is not None and not util.is_alpha(Name):
-            raise TypeError("Resource Name must be alpha-numeric (%s)" % Name)
+        if Name and not Name.isalnum():
+            raise ValueError("Resource Name must be alpha-numeric (%s)" % Name)
+        if properties:
+            if not Properties:
+                Properties = {}
+            Properties.update(properties)
 
         self.Name = Name
-        Properties = util.merge([Properties or {}, properties]) or None
 
-        resource = util.filter_pairs(
-            Type=Type,
-            DependsOn=DependsOn,
-            DeletionPolicy=DeletionPolicy,
-            UpdatePolicy=UpdatePolicy,
-            Metadata=Metadata,
-            Properties=Properties)
-
-        super(Resource, self).__init__(resource)
+        self.update(
+            util.filter_pairs(
+                Type=Type,
+                DependsOn=DependsOn,
+                DeletionPolicy=DeletionPolicy,
+                UpdatePolicy=UpdatePolicy,
+                Metadata=Metadata,
+                Properties=Properties
+            )
+        )
 
     def id(self):
         name = self.Name
@@ -81,23 +87,23 @@ class Resource(Object):
         return FnGetAtt(self.id(), attribute)
 
 
-class Property(Object):
+class Property(dict):
     pass
 
 
-class Options(Object):
+class Options(dict):
     pass
 
 
-class Attribute(Object):
+class Attribute(dict):
     pass
 
 
-class Parameters(Object):
+class Parameters(dict):
     pass
 
 
-class Parameter(Object):
+class Parameter(dict):
 
     def __init__(self, Type,
                  Name=None,
@@ -112,20 +118,22 @@ class Parameter(Object):
                  Description=None,
                  ConstraintDescription=None):
         self.Name = Name
-        parameter = util.filter_pairs(
-            Type=Type,
-            Default=Default,
-            AllowedValues=AllowedValues,
-            AllowedPattern=AllowedPattern,
-            MaxLength=MaxLength,
-            MinLength=MinLength,
-            MaxValue=MaxValue,
-            MinValue=MinValue,
-            NoEcho=NoEcho,
-            Description=Description,
-            ConstraintDescription=ConstraintDescription,
+
+        self.update(
+            util.filter_pairs(
+                Type=Type,
+                Default=Default,
+                AllowedValues=AllowedValues,
+                AllowedPattern=AllowedPattern,
+                MaxLength=MaxLength,
+                MinLength=MinLength,
+                MaxValue=MaxValue,
+                MinValue=MinValue,
+                NoEcho=NoEcho,
+                Description=Description,
+                ConstraintDescription=ConstraintDescription
             )
-        super(Parameter, self).__init__(parameter)
+        )
 
     def id(self):
         return self.Name
@@ -134,22 +142,22 @@ class Parameter(Object):
         return Ref(self.id())
 
 
-class Mappings(Object):
+class Mappings(dict):
     pass
 
 
-class Mapping(Object):
+class Mapping(dict):
     pass
 
 
-class Outputs(Object):
+class Outputs(dict):
     pass
 
 
-class Output(Object):
+class Output(dict):
 
     def __init__(self, value, description=None):
         output = {"Value": value}
         if description is not None:
             output["Description"] = description
-        super(Output, self).__init__(output)
+        self.update(output)
