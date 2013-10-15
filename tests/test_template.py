@@ -86,7 +86,7 @@ class TestResource(unittest.TestCase):
         self.assertEqual("name", self.resource.Name)
 
     def test_name_non_alpha_valueerror(self):
-        self.assertRaises(ValueError, Resource, [], "FOO*BAR")
+        self.assertRaises(ValueError, Resource, "Type", "FOO*BAR")
 
     def test_depends_on(self):
         self.assertEqual("dependson", self.resource["DependsOn"])
