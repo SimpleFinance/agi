@@ -1,12 +1,19 @@
 import unittest
 
-from agi.template import Template, Resource, Parameter
+from agi.template import Template, Resource, Parameter, filter_pairs
+
+
+class TestTemplateUtil(unittest.TestCase):
+
+    def test_filter_pairs(self):
+        self.assertEqual(
+            [("a", 3)],
+            list(filter_pairs(a=3, b=None)))
 
 
 class TestTemplate(unittest.TestCase):
 
     def setUp(self):
-        super(TestTemplate, self).setUp()
         self.template = Template(
             AWSTemplateFormatVersion="version",
             Description="description",
@@ -46,7 +53,6 @@ class TestTemplate(unittest.TestCase):
 class TestTemplateDefaults(unittest.TestCase):
 
     def setUp(self):
-        super(TestTemplateDefaults, self).setUp()
         self.template = Template(Foo="foo")
 
     def test_no_resources(self):
@@ -62,7 +68,6 @@ class TestTemplateDefaults(unittest.TestCase):
 class TestResource(unittest.TestCase):
 
     def setUp(self):
-        super(TestResource, self).setUp()
         self.resource = Resource(
             "type",
             Name="name",
@@ -80,8 +85,8 @@ class TestResource(unittest.TestCase):
     def test_name(self):
         self.assertEqual("name", self.resource.Name)
 
-    def test_name_non_alpha_typeerror(self):
-        self.assertRaises(TypeError, Resource, [], {"Name": "bad-name"})
+    def test_name_non_alpha_valueerror(self):
+        self.assertRaises(ValueError, Resource, "Type", "FOO*BAR")
 
     def test_depends_on(self):
         self.assertEqual("dependson", self.resource["DependsOn"])
@@ -115,7 +120,6 @@ class TestResource(unittest.TestCase):
 class TestResourceDefaults(unittest.TestCase):
 
     def setUp(self):
-        super(TestResourceDefaults, self).setUp()
         self.resource = Resource(Type="type")
 
     def test_nothing(self):
@@ -145,7 +149,6 @@ class TestResourceDefaults(unittest.TestCase):
 class TestParameter(unittest.TestCase):
 
     def setUp(self):
-        super(TestParameter, self).setUp()
         self.parameter = Parameter(
             "type",
             Name="name",
@@ -198,7 +201,6 @@ class TestParameter(unittest.TestCase):
 class TestParameterDefaults(unittest.TestCase):
 
     def setUp(self):
-        super(TestParameterDefaults, self).setUp()
         self.parameter = Parameter("type")
 
     def test_nothing(self):
