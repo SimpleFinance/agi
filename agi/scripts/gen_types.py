@@ -1,6 +1,6 @@
 import lxml.html
 
-template_type_ref = "http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html"
+template_type_ref = "http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html"  # noqa
 tree = lxml.html.parse(template_type_ref)
 
 service_types = {}
