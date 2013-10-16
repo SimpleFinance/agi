@@ -1,3 +1,5 @@
 __all__ = ["Object"]
 
-class Object(dict): pass
+
+class Object(dict):
+    pass

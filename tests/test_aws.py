@@ -1,6 +1,7 @@
 import unittest
 
-from agi.aws import *
+from agi.aws import service
+
 
 class TestService(unittest.TestCase):
 

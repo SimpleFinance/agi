@@ -1,9 +1,9 @@
 from .template import Resource
 
-__all__ = ["service", "AWS"]
 
 def service(name, *services):
     sep = "::"
+
     class Service(Resource):
 
         def __init__(self, Name=None, **params):
@@ -19,13 +19,15 @@ AWS = service("AWS")
 # Generate the following with:
 #   ./bin/pip install lxml
 #   ./bin/python -m agi.scripts.gen_types
-AWS.AutoScaling = service("AWS::AutoScaling",
+AWS.AutoScaling = service(
+    "AWS::AutoScaling",
     "AutoScalingGroup",
     "LaunchConfiguration",
     "ScalingPolicy",
     "Trigger",
 )
-AWS.CloudFormation = service("AWS::CloudFormation",
+AWS.CloudFormation = service(
+    "AWS::CloudFormation",
     "Authentication",
     "CustomResource",
     "Init",
@@ -33,16 +35,20 @@ AWS.CloudFormation = service("AWS::CloudFormation",
     "WaitCondition",
     "WaitConditionHandle",
 )
-AWS.CloudFront = service("AWS::CloudFront",
+AWS.CloudFront = service(
+    "AWS::CloudFront",
     "Distribution",
 )
-AWS.CloudWatch = service("AWS::CloudWatch",
+AWS.CloudWatch = service(
+    "AWS::CloudWatch",
     "Alarm",
 )
-AWS.DynamoDB = service("AWS::DynamoDB",
+AWS.DynamoDB = service(
+    "AWS::DynamoDB",
     "Table",
 )
-AWS.EC2 = service("AWS::EC2",
+AWS.EC2 = service(
+    "AWS::EC2",
     "CustomerGateway",
     "DHCPOptions",
     "EIP",
@@ -70,21 +76,25 @@ AWS.EC2 = service("AWS::EC2",
     "Volume",
     "VolumeAttachment",
 )
-AWS.ElastiCache = service("AWS::ElastiCache",
+AWS.ElastiCache = service(
+    "AWS::ElastiCache",
     "CacheCluster",
     "ParameterGroup",
     "SecurityGroup",
     "SecurityGroupIngress",
     "SubnetGroup ",
 )
-AWS.ElasticBeanstalk = service("AWS::ElasticBeanstalk",
+AWS.ElasticBeanstalk = service(
+    "AWS::ElasticBeanstalk",
     "Application",
     "Environment",
 )
-AWS.ElasticLoadBalancing = service("AWS::ElasticLoadBalancing",
+AWS.ElasticLoadBalancing = service(
+    "AWS::ElasticLoadBalancing",
     "LoadBalancer",
 )
-AWS.IAM = service("AWS::IAM",
+AWS.IAM = service(
+    "AWS::IAM",
     "AccessKey",
     "Group",
     "InstanceProfile",
@@ -93,29 +103,35 @@ AWS.IAM = service("AWS::IAM",
     "User",
     "UserToGroupAddition",
 )
-AWS.RDS = service("AWS::RDS",
+AWS.RDS = service(
+    "AWS::RDS",
     "DBInstance",
     "DBParameterGroup",
     "DBSecurityGroup",
     "DBSecurityGroupIngress",
     "DBSubnetGroup",
 )
-AWS.Route53 = service("AWS::Route53",
+AWS.Route53 = service(
+    "AWS::Route53",
     "RecordSet",
     "RecordSetGroup",
 )
-AWS.S3 = service("AWS::S3",
+AWS.S3 = service(
+    "AWS::S3",
     "Bucket",
     "BucketPolicy",
 )
-AWS.SDB = service("AWS::SDB",
+AWS.SDB = service(
+    "AWS::SDB",
     "Domain",
 )
-AWS.SNS = service("AWS::SNS",
+AWS.SNS = service(
+    "AWS::SNS",
     "Topic",
     "TopicPolicy",
 )
-AWS.SQS = service("AWS::SQS",
+AWS.SQS = service(
+    "AWS::SQS",
     "Queue",
     "QueuePolicy",
 )
