@@ -88,12 +88,12 @@ class Resource(dict):
     def ref(self):
         return Ref(self.id())
 
-    def get_attr(self, attribute):
+    def get_att(self, attribute):
         return FnGetAtt(self.id(), attribute)
 
     # deprecated
     def get(self, attribute):
-        return self.get_attr(attribute)
+        return self.get_att(attribute)
 
 
 class Property(dict):
