@@ -82,7 +82,7 @@ AWS.ElastiCache = service(
     "ParameterGroup",
     "SecurityGroup",
     "SecurityGroupIngress",
-    "SubnetGroup ",
+    "SubnetGroup",
 )
 AWS.ElasticBeanstalk = service(
     "AWS::ElasticBeanstalk",
