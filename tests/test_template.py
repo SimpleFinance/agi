@@ -72,6 +72,7 @@ class TestResource(unittest.TestCase):
             "type",
             Name="name",
             DependsOn="dependson",
+            CreationPolicy="creationpolicy",
             DeletionPolicy="deletionpolicy",
             UpdatePolicy="updatepolicy",
             Metadata="metadata",
@@ -90,6 +91,9 @@ class TestResource(unittest.TestCase):
 
     def test_depends_on(self):
         self.assertEqual("dependson", self.resource["DependsOn"])
+
+    def test_creation_policy(self):
+        self.assertEqual("creationpolicy", self.resource["CreationPolicy"])
 
     def test_deletion_policy(self):
         self.assertEqual("deletionpolicy", self.resource["DeletionPolicy"])

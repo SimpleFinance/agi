@@ -50,6 +50,7 @@ class Resource(dict):
     def __init__(self, Type,
                  Name=None,
                  DependsOn=None,
+                 CreationPolicy=None,
                  DeletionPolicy=None,
                  UpdatePolicy=None,
                  Metadata=None,
@@ -70,6 +71,7 @@ class Resource(dict):
             filter_pairs(
                 Type=Type,
                 DependsOn=DependsOn,
+                CreationPolicy=CreationPolicy,
                 DeletionPolicy=DeletionPolicy,
                 UpdatePolicy=UpdatePolicy,
                 Metadata=Metadata,
