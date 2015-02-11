@@ -113,6 +113,8 @@ AWS.RDS = service(
 )
 AWS.Route53 = service(
     "AWS::Route53",
+    "HealthCheck",
+    "HostedZone",
     "RecordSet",
     "RecordSetGroup",
 )
