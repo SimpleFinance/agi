@@ -80,6 +80,7 @@ AWS.ElastiCache = service(
     "AWS::ElastiCache",
     "CacheCluster",
     "ParameterGroup",
+    "ReplicationGroup",
     "SecurityGroup",
     "SecurityGroupIngress",
     "SubnetGroup",
