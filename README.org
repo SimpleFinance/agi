@@ -1,5 +1,7 @@
 * =agi=
 
+=agi= is deprecated. This package is no longer updated.
+
 =agi= provides primitives that make it easier to model CloudFormation templates and their primary components.
 
 ** Development
